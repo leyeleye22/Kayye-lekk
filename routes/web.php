@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\HomeClientController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,7 +21,7 @@ Route::get('/login', function () {
 Route::post('/register',[AuthController::class,'register'])->name('register');
 Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::get('/home',[HomeClientController::class,'home'])->name('home');
-Route::get('/dashboard',[HomeClientController::class,'dashboard'])->name('dashboard');
+Route::get('/dashboards',[HomeClientController::class,'dashboard'])->name('dashboard');
 Route::middleware(['client'])->group(function(){
  
 });
@@ -32,3 +33,6 @@ Route::middleware(['admin'])->group(function(){
     Route::post('/supprimer-categorie/{id}',[CategorieController::class,'supprimer'])->name('supprimer.categorie');
     Route::get('/lister-categorie',[CategorieController::class,'lister'])->name('lister.categorie');
 });
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
